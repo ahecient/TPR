@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1554560944725.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3859140244",
+    "id" : "97E64DF5",
+    "lastKnownWriteTime" : 1555162649,
+    "last_content_update" : 1555162649,
+    "path" : "~/RStudio/TPR1/lab1.R",
+    "project_path" : "lab1.R",
+    "properties" : {
+        "cursorPosition" : "89,0",
+        "scrollLine" : "49",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

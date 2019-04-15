@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1555310689884.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1497846544",
+    "id" : "3061B231",
+    "lastKnownWriteTime" : 1554880076,
+    "last_content_update" : 1554880076,
+    "path" : "~/RStudio/Lab2/2.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

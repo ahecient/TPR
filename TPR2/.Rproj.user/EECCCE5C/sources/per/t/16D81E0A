@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1554986871763.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "8|22|26|0|\n28|22|57|0|\n59|22|89|0|\n",
+    "hash" : "186674446",
+    "id" : "16D81E0A",
+    "lastKnownWriteTime" : 1555325496,
+    "last_content_update" : 1555325496078,
+    "path" : "~/RStudio/TPR2/lab2.R",
+    "project_path" : "lab2.R",
+    "properties" : {
+        "cursorPosition" : "4,18",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

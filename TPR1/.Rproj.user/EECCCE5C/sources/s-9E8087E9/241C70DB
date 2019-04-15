@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1554805168823.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "241C70DB",
+    "lastKnownWriteTime" : 7308604914264011873,
+    "last_content_update" : 1554805168823,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "CD931537",
+        "caption" : "finalPareto",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=finalPareto&cache_key=CD931537",
+        "displayedObservations" : "20",
+        "environment" : "",
+        "object" : "finalPareto",
+        "preview" : "0",
+        "totalObservations" : "20",
+        "variables" : "4"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
