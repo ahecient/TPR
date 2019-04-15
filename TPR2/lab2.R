@@ -1,10 +1,12 @@
 library(tm)
 
 min <- function(v){
+  v[length(v)] <- 0
   v.na <- v
   v.na[v==0] <- NA
-  return(which.min(v.na))
+  ifelse(is.na(which.min(v.na)),return(1),which.min(v.na))
 }
+
 
 NFA <- function(file){
   list_containers <- list()
@@ -102,13 +104,10 @@ BFA <- function(file){
     else{
       list_containers <-append(list_containers, list(list_elements))
       for (j in 1:length(list_containers)){
-        print(file[i])
         h <- append(h, (100 - do.call(sum, list_containers[[j]])))
-        print(h)
       }
       print(min(h))
       if((do.call(sum, list_containers[[min(h)]])+file[i]) <= 100){
-        print("Enter")
         list_containers[[min(h)]] <- append(list_containers[[min(h)]], file[i])
         mark <- FALSE
       }  
