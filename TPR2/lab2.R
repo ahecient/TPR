@@ -1,12 +1,12 @@
 library(tm)
+library(sjmisc)
 
 min <- function(v){
   v[length(v)] <- 0
   v.na <- v
   v.na[v==0] <- NA
-  ifelse(is.na(which.min(v.na)),return(1),which.min(v.na))
+  return(which.min(v.na))
 }
-
 
 NFA <- function(file){
   list_containers <- list()
@@ -106,11 +106,12 @@ BFA <- function(file){
       for (j in 1:length(list_containers)){
         h <- append(h, (100 - do.call(sum, list_containers[[j]])))
       }
-      print(min(h))
-      if((do.call(sum, list_containers[[min(h)]])+file[i]) <= 100){
-        list_containers[[min(h)]] <- append(list_containers[[min(h)]], file[i])
-        mark <- FALSE
-      }  
+      if(!is_empty(min(h))){
+        if((do.call(sum, list_containers[[min(h)]])+file[i]) <= 100){
+          list_containers[[min(h)]] <- append(list_containers[[min(h)]], file[i])
+          mark <- FALSE
+        }  
+      }
       list_elements <- NULL
       list_elements <- list()
       if (mark){
@@ -122,9 +123,6 @@ BFA <- function(file){
   containers_count <- length(list_containers)
   return(containers_count)
 }
-
-h[length(h)]
-
   
 file <- scan(file = "table.txt", nlines = 1, skip = 2)
 NFA(file)
