@@ -8,6 +8,11 @@ min <- function(v){
   return(which.min(v.na))
 }
 
+min_count_containers <- function(file){
+  M <- ceiling(sum(file)/100)
+  return(M)
+}
+
 NFA <- function(file){
   list_containers <- list()
   list_elements <- list()
@@ -124,7 +129,8 @@ BFA <- function(file){
   return(containers_count)
 }
   
-file <- scan(file = "table.txt", nlines = 1, skip = 2)
+file <- scan(file = "table.txt")
+min_count_containers(file)
 NFA(file)
 FFA(file)
 WFA(file)
