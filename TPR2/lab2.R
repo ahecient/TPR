@@ -1,12 +1,4 @@
 library(tm)
-library(sjmisc)
-
-min <- function(v){
-  v[length(v)] <- 0
-  v.na <- v
-  v.na[v==0] <- NA
-  return(which.min(v.na))
-}
 
 min_count_containers <- function(file){
   M <- ceiling(sum(file)/100)
@@ -31,7 +23,7 @@ NFA <- function(file){
     }
   }
   save(list_containers, list_elements, file = "NFA.RData")
-  containers_count <- length(list_containers)
+  containers_count <- length(list_containers)+length(list_elements)
   return(c(containers_count, count))
 }
 
@@ -58,14 +50,13 @@ FFA <- function(file){
       }
       list_elements <- NULL
       list_elements <- list()
-      #count <- count + 1
       if (mark){
         list_elements <- append(list_elements, file[i])
       }
     }
   }
   save(list_containers, file = "FFA.RData")
-  containers_count <- length(list_containers)
+  containers_count <- length(list_containers)+length(list_elements)
   return(c(containers_count, count))
 }
 
@@ -95,21 +86,20 @@ WFA <- function(file){
       }
       list_elements <- NULL
       list_elements <- list()
-      #count <- count +1
       if (mark){
         list_elements <- append(list_elements, file[i])
       }
     }
   }
   save(list_containers, file = "WFA.RData")
-  containers_count <- length(list_containers)
+  containers_count <- length(list_containers)+length(list_elements)
   return(c(containers_count, count))
 }
 
 BFA <- function(file){
-  count <- 0
   list_containers <- list()
   list_elements <- list()
+  count <- 0
   
   for(i in 1:length(file)){
     h <- integer()
@@ -119,17 +109,23 @@ BFA <- function(file){
       list_elements <- append(list_elements, file[i]) 
     }
     else{
-      list_containers <-append(list_containers, list(list_elements))
-      for (j in 1:length(list_containers)){
-        count <- count + 1
+      index_min <- 0
+      min_f <- 100
+      list_containers <- append(list_containers, list(list_elements))
+      for(j in 1:length(list_containers)){
         h <- append(h, (100 - do.call(sum, list_containers[[j]])))
-      }
-      if(!is_empty(min(h))){
         count <- count + 1
-        if((do.call(sum, list_containers[[min(h)]])+file[i]) <= 100){
-          list_containers[[min(h)]] <- append(list_containers[[min(h)]], file[i])
-          mark <- FALSE
-        }  
+        if(h[length(h)] >= file[i]){
+          count <- count + 1
+          if(h[length(h)] <= min_f){
+            min_f <- h[length(h)]
+            index_min <- length(h)
+          }
+        }
+      }
+      if(index_min!=0){
+        list_containers[[index_min]] <- append(list_containers[[index_min]], file[i])
+        mark <- FALSE
       }
       list_elements <- NULL
       list_elements <- list()
@@ -139,7 +135,7 @@ BFA <- function(file){
     }
   }
   save(list_containers, file = "BFA.RData")
-  containers_count <- length(list_containers)
+  containers_count <- length(list_containers)+length(list_elements)
   return(c(containers_count, count))
 }
   
