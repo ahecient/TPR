@@ -22,9 +22,10 @@ NFA <- function(file){
       list_elements <- append(list_elements, file[i])
     }
   }
-  save(list_containers, list_elements, file = "NFA.RData")
-  containers_count <- length(list_containers)+length(list_elements)
-  return(c(containers_count, count))
+  NFA_count <- length(list_containers)+length(list_elements)
+  NFA_complexity <- count
+  save(list_containers,NFA_count,NFA_complexity, file = "NFA.RData")
+  return(c(NFA_count, NFA_complexity))
 }
 
 FFA <- function(file){
@@ -55,9 +56,10 @@ FFA <- function(file){
       }
     }
   }
-  save(list_containers, file = "FFA.RData")
-  containers_count <- length(list_containers)+length(list_elements)
-  return(c(containers_count, count))
+  FFA_count <- length(list_containers)+length(list_elements)
+  FFA_complexity <- count
+  save(list_containers,FFA_count, FFA_complexity, file = "FFA.RData")
+  return(c(FFA_count, FFA_complexity))
 }
 
 WFA <- function(file){
@@ -91,9 +93,10 @@ WFA <- function(file){
       }
     }
   }
-  save(list_containers, file = "WFA.RData")
-  containers_count <- length(list_containers)+length(list_elements)
-  return(c(containers_count, count))
+  WFA_count <- length(list_containers)+length(list_elements)
+  WFA_complexity <- count
+  save(list_containers,WFA_count, WFA_complexity, file = "WFA.RData")
+  return(c(WFA_count, WFA_complexity))
 }
 
 BFA <- function(file){
@@ -134,12 +137,41 @@ BFA <- function(file){
       }
     }
   }
-  save(list_containers, file = "BFA.RData")
-  containers_count <- length(list_containers)+length(list_elements)
-  return(c(containers_count, count))
+  BFA_count <- length(list_containers)+length(list_elements)
+  BFA_complexity <- count
+  save(list_containers, BFA_count, BFA_complexity, file = "BFA.RData")
+  return(c(BFA_count, BFA_complexity))
 }
-  
+
+
+
+
+
+
+
+result_desc <- data.frame(data = character(), NFA_count = integer(), 
+                     FFA_count = integer(), WFA_count = integer(), BFA = integer(),
+                     NFA_complexity = integer(), FFA_complexity = integer(),
+                     WFA_complexity = integer(), BFA_complexity = integer())
+
 file <- scan(file = "table.txt", nlines = 1)
+file <- sort(file, decreasing = TRUE)
+min_count_containers(file)
+NFA(file)
+FFA(file)
+WFA(file)
+BFA(file)M 
+load("NFA.RData")
+load("FFA.RData")
+load("WFA.RData")
+load("BFA.RData")
+result_desc <- rbind(result_desc, data.frame(data = "1 рядок", NFA_count = NFA_count, FFA_count = FFA_count,
+                                   WFA_count = WFA_count, BFA_count = BFA_count,
+                                   NFA_complexity = NFA_complexity, FFA_complexity = FFA_complexity,
+                                   WFA_complexity = WFA_complexity, BFA_complexity = BFA_complexity))
+
+file <- scan(file = "table.txt", nlines = 1, skip = 1)
+file <- sort(file, decreasing = TRUE)
 min_count_containers(file)
 NFA(file)
 FFA(file)
@@ -149,5 +181,40 @@ load("NFA.RData")
 load("FFA.RData")
 load("WFA.RData")
 load("BFA.RData")
+result_desc <- rbind(result_desc, data.frame(data = "2 рядок", NFA_count = NFA_count, FFA_count = FFA_count,
+                                   WFA_count = WFA_count, BFA_count = BFA_count,
+                                   NFA_complexity = NFA_complexity, FFA_complexity = FFA_complexity,
+                                   WFA_complexity = WFA_complexity, BFA_complexity = BFA_complexity))
 
+file <- scan(file = "table.txt", nlines = 1, skip = 2)
+file <- sort(file,decreasing = TRUE)
+min_count_containers(file)
+NFA(file)
+FFA(file)
+WFA(file)
+BFA(file)
+load("NFA.RData")
+load("FFA.RData")
+load("WFA.RData")
+load("BFA.RData")
+result_desc <- rbind(result_desc, data.frame(data = "3 рядок", NFA_count = NFA_count, FFA_count = FFA_count,
+                                   WFA_count = WFA_count, BFA_count = BFA_count,
+                                   NFA_complexity = NFA_complexity, FFA_complexity = FFA_complexity,
+                                   WFA_complexity = WFA_complexity, BFA_complexity = BFA_complexity))
+
+file <- scan(file = "table.txt", nlines = 3)
+file <- sort(file, decreasing = TRUE)
+min_count_containers(file)
+NFA(file)
+FFA(file)
+WFA(file)
+BFA(file)
+load("NFA.RData")
+load("FFA.RData")
+load("WFA.RData")
+load("BFA.RData")
+result_desc <- rbind(result_desc, data.frame(data = "Всі рядки", NFA_count = NFA_count, FFA_count = FFA_count,
+                                   WFA_count = WFA_count, BFA_count = BFA_count,
+                                   NFA_complexity = NFA_complexity, FFA_complexity = FFA_complexity,
+                                   WFA_complexity = WFA_complexity, BFA_complexity = BFA_complexity))
 
