@@ -1,3 +1,4 @@
+
 data <- read.table("table.txt", header = TRUE, sep = " ", check.names = FALSE, stringsAsFactors = FALSE)
 
 
@@ -23,8 +24,15 @@ for(j in 1:(ncol(data)-1)){
     nd <- append(nd, (data$S[which(data[,j]=="d")]))
 }
 na <- na*v
+na <- sum(na)
 nb <- nb*v
+nb <- sum(na)
 nc <- nc*v
+nc <- sum(nc)
 nd <- nd*v
+nd <- sum(nd)
 
-print(data[,1]=="a")
+summ <- function(x){
+  x <- x*v
+  x <- sum(x)
+}
