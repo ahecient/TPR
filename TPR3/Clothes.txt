@@ -1,0 +1,18 @@
+Clothes	Weight	Cost
+Blizer	0.5	6
+Pea jacket	4	48
+Cotton pants	2	24
+Flip flops	0.5	6
+Jeans	1	12
+Cap	0.5	6
+Sneakers	1	12
+Jacket	2	24
+Coat	3	36
+Gloves	0.5	6
+Sweater	1	12
+Shirt	0.5	6
+T-shirt	0.5	6
+Shoe	1.5	18
+Boots	2	24
+Hat	1	12
+Shorts	0.5	6
