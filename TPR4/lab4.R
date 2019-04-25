@@ -1,3 +1,5 @@
+library(foreach)
+
 Borde <- function(data){
   voters <- colnames(data)
   voters <- as.integer(voters)
@@ -61,44 +63,43 @@ Compl <- function(data){
   return(t(lst_complend))
 }
 
+Parallel <- function(data) {
+  voters <- colnames(data)
+  voters <- as.integer(voters)
+  
+  lst_parallel <- list()
+  candidate <- sort(unique(data[,1]))
+  
+  while(length(candidate)!=1){
+    for(i in 1:length(candidate)){
+      for(j in 1:length(candidate)){
+        first_candidate <- 0
+        second_candidate <- 0
+        if(i != j & i < j){
+          for(k in 1:ncol(data)){
+            if(which(data[,k]==candidate[i]) < which(data[,k]==candidate[j])) first_candidate <- first_candidate+voters[k]
+            else second_candidate <- second_candidate+voters[k]
+          }
+          if(first_candidate > second_candidate){
+            lst_parallel <- append(lst_parallel,list(paste(first_candidate,second_candidate, sep = ":"), paste(candidate[i],candidate[j], sep = ">")))
+            data <- as.data.frame(sapply(data, function(x) x[x != candidate[j]]))
+            candidate <- candidate[ candidate != candidate[j]]
+            
+          }
+          else{
+            lst_parallel <- append(lst_parallel,list(paste(first_candidate,second_candidate, sep = ":"), paste(candidate[i],candidate[j], sep = "<")))
+            data <- as.data.frame(sapply(data, function(x) x[x != candidate[i]]))
+            candidate <- candidate[ candidate != candidate[i]]
+          }
+          break
+        }
+      }
+    }
+  }
+  return(c(lst_parallel, paste("Winner:", candidate, sep = " ")))
+}
+
 data <- read.table("table.txt", header = TRUE, sep = " ", check.names = FALSE, stringsAsFactors = FALSE)
 Borde(data)
 Compl(data)
-voters <- colnames(data)
-voters <- as.integer(voters)
-
-lst_complend <- list()
-candidate <- sort(unique(data[,1]))
-mark <- TRUE
-
-for(i in 1:length(candidate)){
-  for(j in 1:length(candidate)){
-    first_candidate <- 0
-    second_candidate <- 0
-    if(i != j & i < j){
-      for(k in 1:ncol(data)){
-        if(which(data[,k]==candidate[i]) < which(data[,k]==candidate[j])) first_candidate <- first_candidate+voters[k]
-        else second_candidate <- second_candidate+voters[k]
-      }
-      if(first_candidate > second_candidate){
-        print(c(candidate[i],">",candidate[j]))
-        data <- as.data.frame(sapply(data, function(x) x[x != candidate[j]]))
-        candidate <- candidate[ candidate != candidate[j]]
-        print(data)
-        break
-      }
-      else{
-        print(c(candidate[i],"<",candidate[j]))
-        data <- as.data.frame(sapply(data, function(x) x[x != candidate[i]]))
-        candidate <- candidate[ candidate != candidate[i]]
-        print(data)
-        break
-      }
-      
-    }
-  }
-}
-
-
-
-
+Parallel(data)
