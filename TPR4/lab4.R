@@ -1,26 +1,26 @@
 Borde <- function(data){
-  v <- colnames(data)
-  v <- as.integer(v)
+  voters <- colnames(data)
+  voters <- as.integer(voters)
   
-  data$S <- ""
+  data$weight <- ""
   
   weigth <- 0
   
   for(i in nrow(data):1){
-    data$S[i] <- weigth
+    data$weight[i] <- weigth
     weigth <- weigth + 1
   }
   
-  data$S <- as.integer(data$S)
+  data$weight <- as.integer(data$weight)
   lst <- list()
-  for(j in 1:(ncol(data)-1)){
-    lst[["a"]] <- append(lst[["a"]], (data$S[which(data[,j]=="a")]))
-    lst[["b"]] <- append(lst[["b"]], (data$S[which(data[,j]=="b")]))
-    lst[["c"]] <- append(lst[["c"]], (data$S[which(data[,j]=="c")]))
-    lst[["d"]] <- append(lst[["d"]], (data$S[which(data[,j]=="d")]))
+  candidate <- sort(unique(data[,1]))
+  for(i in 1:length(candidate)){
+    for(j in 1:(ncol(data)-1)){
+      lst[[candidate[i]]] <- append(lst[[candidate[i]]], (data$weight[which(data[,j]==candidate[i])]))
+    }
   }
   
-  lst <- lapply(lst, "*", v)
+  lst <- lapply(lst, "*", voters)
   lst <- lapply(lst, function(x) sum(x))
   lst <- lst[order(-unlist(lst))]
   lst <- as.matrix(lst)
