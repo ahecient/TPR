@@ -64,5 +64,41 @@ Compl <- function(data){
 data <- read.table("table.txt", header = TRUE, sep = " ", check.names = FALSE, stringsAsFactors = FALSE)
 Borde(data)
 Compl(data)
+voters <- colnames(data)
+voters <- as.integer(voters)
+
+lst_complend <- list()
+candidate <- sort(unique(data[,1]))
+mark <- TRUE
+
+for(i in 1:length(candidate)){
+  for(j in 1:length(candidate)){
+    first_candidate <- 0
+    second_candidate <- 0
+    if(i != j & i < j){
+      for(k in 1:ncol(data)){
+        if(which(data[,k]==candidate[i]) < which(data[,k]==candidate[j])) first_candidate <- first_candidate+voters[k]
+        else second_candidate <- second_candidate+voters[k]
+      }
+      if(first_candidate > second_candidate){
+        print(c(candidate[i],">",candidate[j]))
+        data <- as.data.frame(sapply(data, function(x) x[x != candidate[j]]))
+        candidate <- candidate[ candidate != candidate[j]]
+        print(data)
+        break
+      }
+      else{
+        print(c(candidate[i],"<",candidate[j]))
+        data <- as.data.frame(sapply(data, function(x) x[x != candidate[i]]))
+        candidate <- candidate[ candidate != candidate[i]]
+        print(data)
+        break
+      }
+      
+    }
+  }
+}
+
+
 
 
