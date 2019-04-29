@@ -1,0 +1,7 @@
+H	T	Headdress	Outerwear	Gloves	Trousers	Footwear	Weight
+1	-10	Hat	Pea jacket	Gloves	Cotton pants	Boots	9.5
+2	0	Hat	Coat	Gloves	Jeans	Boots	7.5
+3	10	Cap	Jacket	NA	Jeans	Shoe	5
+4	20	NA	Sweater	NA	Jeans	Sneakers	3
+5	30	Blizer	Shirt	NA	Jeans	Sneakers	3
+6	40	Blizer	T-shirt	NA	Shorts	Flip flops	2
