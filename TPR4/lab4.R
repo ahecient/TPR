@@ -1,28 +1,28 @@
 
 Borde <- function(data){
-  voters <- colnames(data)        #преобразовываем выборцов
+  voters <- colnames(data)        
   voters <- as.integer(voters)
   
-  data$weight <- ""              #добавляем колонку для веса
+  data$weight <- ""              
   
   weigth <- 0
   
-  for(i in nrow(data):1){       #присваиваем весы последнему 0 и +1 выше
+  for(i in nrow(data):1){       
     data$weight[i] <- weigth
     weigth <- weigth + 1
   }
   
   data$weight <- as.integer(data$weight)
   lst <- list()
-  candidate <- sort(unique(data[,1]))   #вектор кандидатов
-  for(i in 1:length(candidate)){        #для каждого кандидата 
-    for(j in 1:(ncol(data)-1)){         #проверяем всю таблицу по столбцам
-      lst[[candidate[i]]] <- append(lst[[candidate[i]]], (data$weight[which(data[,j]==candidate[i])])) #добавляем в список кандидата 
-      #и его вес для каждого расположения
+  candidate <- sort(unique(data[,1]))   
+  for(i in 1:length(candidate)){         
+    for(j in 1:(ncol(data)-1)){         
+      lst[[candidate[i]]] <- append(lst[[candidate[i]]], (data$weight[which(data[,j]==candidate[i])])) 
+    
     }
   }
   
-  lst <- lapply(lst, "*", voters) #умножаем на выборцец
+  lst <- lapply(lst, "*", voters) 
   lst <- lapply(lst, function(x) sum(x))
   lst <- lst[order(-unlist(lst))]
   lst <- as.matrix(lst)
