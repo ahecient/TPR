@@ -33,6 +33,9 @@ for(i in 1:nrow(SeasonsTable)){
 
 Strategy <- function(month, P){
   CostTable <- data.frame(stringsAsFactors = FALSE)
+  ##------FOR5
+  h <- c(2,4,9,15,16)
+  ClothesTable$Cost[h] <- ClothesTable$Cost[h]/3
   
   for(i in month){
     result <- integer()
@@ -106,7 +109,7 @@ Strategy <- function(month, P){
   colnames(CostTable) <- SeasonsTable$Month[month]
   CostTable$Cost <- SetTable$Weight*Cost1kg
   
-  
+  ##----------FOR125----------
   Result <- integer()
   for(i in 1:nrow(CostTable)){
     E <- integer()
@@ -117,6 +120,25 @@ Strategy <- function(month, P){
     print(c(paste("E", i, sep = ""), sum(-E)))
   }
   print(c("Best strategy:", which.max(Result)))
+  
+  ##----------FOR34-----------
+  # CostTable <- rbind(CostTable,P)
+  # 
+  # ##-------3
+  # ##CostTable[nrow(CostTable), winter] <- CostTable[nrow(CostTable), winter]*3
+  # 
+  # Result <- integer()
+  # for(i in 1:(nrow(CostTable)-1)){
+  #   E <- integer()
+  #   for(j in 1:(ncol(CostTable)-1)){
+  #     E <- append(E, (CostTable[i,j]+CostTable$Cost[i])*CostTable[nrow(CostTable),j])
+  #   }
+  #   Result <- append(Result, sum(-E))
+  #   print(c(paste("E", i, sep = ""), sum(-E)))
+  # }
+  # print(c("Best strategy:", which.max(Result)))
+
+  
 }
 
 ##---------------FIRST----------------
@@ -147,5 +169,15 @@ autumn <- c(9,10,11)
 Strategy(autumn, 1/3)
 
 ##--------------THIRD-----------------
+
+P <- rep(1/12,13)
+Strategy(allmonth, P)
+
+##--------------FOURTH-----------------
+P <- c(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+P <- P/365
+Strategy(allmonth, P)
+##--------------FIFTH-----------------
+Strategy(allmonth, 0.083)
 
 
