@@ -51,8 +51,8 @@ Compl <- function(data){
         }
         if(first_candidate > second_candidate) lst_complend[[candidate[i]]] <- lst_complend[[candidate[i]]] + 1 
         else lst_complend[[candidate[j]]] <- lst_complend[[candidate[j]]] - 1
-        #print(paste(string[i], string[j], sep = ":"))
-        #print(c(y,x))
+        #print(paste(candidate[i], candidate[j], sep = ":"))
+        #print(c(first_candidate,second_candidate))
       }
     }
   }
