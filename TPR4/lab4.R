@@ -49,13 +49,22 @@ Compl <- function(data){
           if(which(data[,k]==candidate[i]) < which(data[,k]==candidate[j])) first_candidate <- first_candidate+voters[k]
           else second_candidate <- second_candidate+voters[k]
         }
-        if(first_candidate > second_candidate) lst_complend[[candidate[i]]] <- lst_complend[[candidate[i]]] + 1 
-        else lst_complend[[candidate[j]]] <- lst_complend[[candidate[j]]] - 1
-        #print(paste(candidate[i], candidate[j], sep = ":"))
-        #print(c(first_candidate,second_candidate))
+        if(first_candidate > second_candidate) 
+        {
+          lst_complend[[candidate[i]]] <- lst_complend[[candidate[i]]] + 1  
+          lst_complend[[candidate[j]]] <- lst_complend[[candidate[j]]] - 1
+        }
+        else {
+          lst_complend[[candidate[j]]] <- lst_complend[[candidate[j]]] + 1
+          lst_complend[[candidate[i]]] <- lst_complend[[candidate[i]]] - 1
+        }
+        print(paste(candidate[i], candidate[j], sep = ":"))
+        print(c(first_candidate,second_candidate))
+
       }
     }
   }
+  print(lst_complend)
   
   lst_complend <- lst_complend[order(-unlist(lst_complend))]
   lst_complend <- as.matrix(lst_complend)
