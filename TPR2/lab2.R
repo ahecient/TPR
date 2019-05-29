@@ -1,8 +1,14 @@
 library(tm)
+library(sjmisc)
 
 min_count_containers <- function(file){
   M <- ceiling(sum(file)/100)
   return(M)
+}
+
+check_last_cont <- function(list){
+  if(!is_empty(list)) return (1)
+  else return (0)
 }
 
 NFA <- function(file){
@@ -22,7 +28,7 @@ NFA <- function(file){
       list_elements <- append(list_elements, file[i])
     }
   }
-  NFA_count <- length(list_containers)+length(list_elements)
+  NFA_count <- length(list_containers)+check_last_cont(list_elements)
   NFA_complexity <- count
   save(list_containers,NFA_count,NFA_complexity, file = "NFA.RData")
   return(c(NFA_count, NFA_complexity))
@@ -56,7 +62,7 @@ FFA <- function(file){
       }
     }
   }
-  FFA_count <- length(list_containers)+length(list_elements)
+  FFA_count <- length(list_containers)+check_last_cont(list_elements)
   FFA_complexity <- count
   save(list_containers,FFA_count, FFA_complexity, file = "FFA.RData")
   return(c(FFA_count, FFA_complexity))
@@ -93,7 +99,7 @@ WFA <- function(file){
       }
     }
   }
-  WFA_count <- length(list_containers)+length(list_elements)
+  WFA_count <- length(list_containers)+check_last_cont(list_elements)
   WFA_complexity <- count
   save(list_containers,WFA_count, WFA_complexity, file = "WFA.RData")
   return(c(WFA_count, WFA_complexity))
@@ -137,7 +143,7 @@ BFA <- function(file){
       }
     }
   }
-  BFA_count <- length(list_containers)+length(list_elements)
+  BFA_count <- length(list_containers)+check_last_cont(list_elements)
   BFA_complexity <- count
   save(list_containers, BFA_count, BFA_complexity, file = "BFA.RData")
   return(c(BFA_count, BFA_complexity))
@@ -160,7 +166,7 @@ min_count_containers(file)
 NFA(file)
 FFA(file)
 WFA(file)
-BFA(file)M 
+BFA(file)
 load("NFA.RData")
 load("FFA.RData")
 load("WFA.RData")
